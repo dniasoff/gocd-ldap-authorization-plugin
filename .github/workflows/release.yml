@@ -1,0 +1,46 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Create Stable Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_USER:  "gocd"
+      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      PRERELEASE:   "${{ github.event.inputs.prerelease }}"
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 15
+      - name: Release
+        run: ./gradlew clean check assemble
+      - name: Set the value
+        id: get_version
+        run: |
+          echo "plugin_version=$(ls ./build/libs/gocd-ldap-authorization-plugin-*.jar | cut -c 45- | rev | cut -c 5- | rev)" >> $GITHUB_ENV
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: gocd-ldap-authorization-plugin-${{ env.plugin_version }}.jar
+          path: build/libs/gocd-ldap-authorization-plugin-${{ env.plugin_version }}.jar
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/libs/gocd-ldap-authorization-plugin-${{ env.plugin_version }}.jar
+          asset_name: gocd-ldap-authorization-plugin.jar
+          tag: ${{ github.ref }}
+          overwrite: true
+   

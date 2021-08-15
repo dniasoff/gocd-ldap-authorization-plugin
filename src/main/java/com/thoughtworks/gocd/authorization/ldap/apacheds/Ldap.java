@@ -144,7 +144,7 @@ public class Ldap {
                 final SearchRequest searchRequest = new SearchRequestImpl()
                         .setScope(SearchScope.SUBTREE)
                         .addAttributes("dn")
-                        .setSizeLimit(0)
+                        .setSizeLimit(1000)
                         .setFilter(filter)
                         .setTimeLimit(ldapConfiguration.getSearchTimeout())
                         .setBase(new Dn(searchBase));

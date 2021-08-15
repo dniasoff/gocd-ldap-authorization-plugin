@@ -129,7 +129,7 @@ public class LdapTest {
         assertThat(searchRequest.getBase(), is("ou=foo,dc=bar"));
         assertThat(searchRequest.getScope(), is(SearchScope.SUBTREE));
         assertThat(searchRequest.getAttributes(), is(Collections.singletonList("dn")));
-        assertThat(searchRequest.getSizeLimit(), is(0L));
+        assertThat(searchRequest.getSizeLimit(), is(1000L));
         assertThat(searchRequest.getFilter(), is(FilterParser.parse("(member=admin)")));
         assertThat(searchRequest.getTimeLimit(), is(5));
     }
