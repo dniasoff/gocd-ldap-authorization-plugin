@@ -21,7 +21,7 @@ group = 'com.thoughtworks.gocd'
 
 gocdPlugin {
   id = 'com.thoughtworks.gocd.authorization.ldap'
-  pluginVersion = '4.0.1'
+  pluginVersion = '4.0.2'
   goCdVersion = '19.2.0'
   name = 'LDAP Authorization Plugin for GoCD'
   description = 'LDAP Authorization Plugin for GoCD'
@@ -74,8 +74,8 @@ dependencies {
   implementation group: 'commons-io', name: 'commons-io', version: '2.5'
   implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
 
-  implementation group: 'org.apache.directory.api', name: 'api-ldap-client-api', version: '1.0.0'
-  implementation group: 'org.apache.directory.api', name: 'api-ldap-codec-standalone', version: '1.0.0'
+  implementation group: 'org.apache.directory.api', name: 'api-ldap-client-api', version: '1.0.3'
+  implementation group: 'org.apache.directory.api', name: 'api-ldap-codec-standalone', version: '1.0.3'
 
   testImplementation group: 'junit', name: 'junit', version: '4.12'
   testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
