@@ -40,7 +40,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/libs/gocd-ldap-authorization-plugin-${{ env.plugin_version }}.jar
-          asset_name: gocd-ldap-authorization-plugin.jar
+          asset_name: gocd-ldap-authorization-plugin-${{ env.plugin_version }}.jar
           tag: ${{ github.ref }}
           overwrite: true
    
